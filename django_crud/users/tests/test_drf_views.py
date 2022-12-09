@@ -23,8 +23,10 @@ class TestUserViewSet:
 
         response = view.me(request)
 
+        print("kjkajdfklajfdlkjalskdfjsklfdjakjdfklajfl", response.data)
+
         assert response.data == {
             "username": user.username,
             "name": user.name,
-            "url": f"http://testserver/api/users/{user.username}/",
+            "url": f"http://testserver/app/users/{user.username}/",
         }

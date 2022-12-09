@@ -5,17 +5,17 @@ from django_crud.users.models import User
 
 def test_user_detail(user: User):
     assert (
-        reverse("api:user-detail", kwargs={"username": user.username})
-        == f"/api/users/{user.username}/"
+        reverse("app:user-detail", kwargs={"username": user.username})
+        == f"/app/users/{user.username}/"
     )
-    assert resolve(f"/api/users/{user.username}/").view_name == "api:user-detail"
+    assert resolve(f"/app/users/{user.username}/").view_name == "app:user-detail"
 
 
 def test_user_list():
-    assert reverse("api:user-list") == "/api/users/"
-    assert resolve("/api/users/").view_name == "api:user-list"
+    assert reverse("app:user-list") == "/app/users/"
+    assert resolve("/app/users/").view_name == "app:user-list"
 
 
 def test_user_me():
-    assert reverse("api:user-me") == "/api/users/me/"
-    assert resolve("/api/users/me/").view_name == "api:user-me"
+    assert reverse("app:user-me") == "/app/users/me/"
+    assert resolve("/app/users/me/").view_name == "app:user-me"
