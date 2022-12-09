@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
+    "dj_rest_auth",
     "corsheaders",
     "drf_spectacular",
 ]
@@ -300,6 +301,15 @@ SOCIALACCOUNT_ADAPTER = "django_crud.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "django_crud.users.forms.UserSocialSignupForm"}
 
+# dj-rest-auth
+# ------------------------------------------------------------------------------
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+REST_USE_JWT = True
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+JWT_AUTH_COOKIE = "auth"
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+REST_SESSION_LOGIN = True
+
 # django-rest-framework
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
@@ -307,6 +317,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
