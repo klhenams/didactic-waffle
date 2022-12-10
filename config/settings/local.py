@@ -68,12 +68,12 @@ ACCOUNT_EMAIL_VERIFICATION = env(
     "DJANGO_ALLAUTH_ACCOUNT_EMAIL_VERIFICATION", default="optional"
 )
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = env.bool("DJANGO_ACCOUNT_EMAIL_REQUIRED", default=False)
 
 # django
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/4.1/topics/email/#email-backends
 EMAIL_BACKEND = env(
-    "DJANGO_ALLAUTH_EMAIL_BACKEND",
+    "DJANGO_SMTP_EMAIL_BACKEND",
     default="django.core.mail.backends.console.EmailBackend",
 )

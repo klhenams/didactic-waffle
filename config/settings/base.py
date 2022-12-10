@@ -336,3 +336,9 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+# Email
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/4.1/topics/email/#smtp-backend
+EMAIL_HOST = env("DJANGO_SMTP_EMAIL_HOST", default="smtp.gmail.com")
+# https://docs.djangoproject.com/en/4.1/topics/email/#smtp-backend
+EMAIL_PORT = env.int("DJANGO_SMTP_EMAIL_PORT", default=587)
