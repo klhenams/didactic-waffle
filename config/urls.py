@@ -1,3 +1,4 @@
+from dj_rest_auth.registration.views import ConfirmEmailView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -31,6 +32,11 @@ urlpatterns += [
     # DRF auth token
     path("auth-token/", obtain_auth_token),
     path("auth/", include("dj_rest_auth.urls")),
+    path(
+        "auth/registration/account-confirm-email/<str:key>/",
+        ConfirmEmailView.as_view(),
+        name="account_confirm_email",
+    ),
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path(
