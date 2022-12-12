@@ -293,7 +293,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "django_crud.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "django_crud.users.adapters.CustomAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 ACCOUNT_FORMS = {"signup": "django_crud.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
@@ -342,3 +342,6 @@ SPECTACULAR_SETTINGS = {
 EMAIL_HOST = env("DJANGO_SMTP_EMAIL_HOST", default="smtp.gmail.com")
 # https://docs.djangoproject.com/en/4.1/topics/email/#smtp-backend
 EMAIL_PORT = env.int("DJANGO_SMTP_EMAIL_PORT", default=587)
+# django-allauth cont'd
+# ------------------------------------------------------------------------------
+ACCOUNT_ACTIVATION_LINK = env("DJANGO_ACCOUNT_ACTIVATION_LINK", default=None)

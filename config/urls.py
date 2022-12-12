@@ -1,4 +1,5 @@
 from dj_rest_auth.registration.views import ConfirmEmailView
+from dj_rest_auth.views import PasswordResetConfirmView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -31,6 +32,11 @@ urlpatterns += [
     path("app/", include("config.api_router")),
     # DRF auth token
     path("auth-token/", obtain_auth_token),
+    path(
+        "auth/password/reset/confirm/<uidb64>/<token>/",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
     path("auth/", include("dj_rest_auth.urls")),
     path(
         "auth/registration/account-confirm-email/<str:key>/",
