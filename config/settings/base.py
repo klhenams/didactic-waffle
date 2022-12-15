@@ -345,3 +345,7 @@ EMAIL_PORT = env.int("DJANGO_SMTP_EMAIL_PORT", default=587)
 # django-allauth cont'd
 # ------------------------------------------------------------------------------
 ACCOUNT_ACTIVATION_LINK = env("DJANGO_ACCOUNT_ACTIVATION_LINK", default=None)
+PASSWORD_RESET_LINK = env("DJANGO_PASSWORD_RESET_LINK", default=None)
+REST_AUTH_SERIALIZERS = {
+    "PASSWORD_RESET_SERIALIZER": "django_crud.users.serializers.authentication.CustomPasswordResetSerializer"
+}
