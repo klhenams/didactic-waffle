@@ -23,8 +23,6 @@ class TestUserViewSet:
 
         response = view.me(request)
 
-        print("kjkajdfklajfdlkjalskdfjsklfdjakjdfklajfl", response.data)
-
         assert response.data == {
             "username": user.username,
             "name": user.name,
