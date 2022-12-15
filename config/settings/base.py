@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
+    "dj_rest_auth",
     "corsheaders",
     "drf_spectacular",
 ]
@@ -292,13 +293,22 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "django_crud.users.adapters.AccountAdapter"
+ACCOUNT_ADAPTER = "django_crud.users.adapters.CustomAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 ACCOUNT_FORMS = {"signup": "django_crud.users.forms.UserSignupForm"}
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = "django_crud.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "django_crud.users.forms.UserSocialSignupForm"}
+
+# dj-rest-auth
+# ------------------------------------------------------------------------------
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+REST_USE_JWT = True
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+JWT_AUTH_COOKIE = "auth"
+# https://dj-rest-auth.readthedocs.io/en/latest/configuration.html
+REST_SESSION_LOGIN = True
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
@@ -307,13 +317,14 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
-CORS_URLS_REGEX = r"^/api/.*$"
+CORS_URLS_REGEX = r"^/app/.*$"
 
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
@@ -325,3 +336,16 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+# Email
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/4.1/topics/email/#smtp-backend
+EMAIL_HOST = env("DJANGO_SMTP_EMAIL_HOST", default="smtp.gmail.com")
+# https://docs.djangoproject.com/en/4.1/topics/email/#smtp-backend
+EMAIL_PORT = env.int("DJANGO_SMTP_EMAIL_PORT", default=587)
+# django-allauth cont'd
+# ------------------------------------------------------------------------------
+ACCOUNT_ACTIVATION_LINK = env("DJANGO_ACCOUNT_ACTIVATION_LINK", default=None)
+PASSWORD_RESET_LINK = env("DJANGO_PASSWORD_RESET_LINK", default=None)
+REST_AUTH_SERIALIZERS = {
+    "PASSWORD_RESET_SERIALIZER": "django_crud.users.serializers.authentication.CustomPasswordResetSerializer"
+}

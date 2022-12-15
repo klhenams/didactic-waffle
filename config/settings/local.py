@@ -60,3 +60,20 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# django-allauth
+# ------------------------------------------------------------------------------
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_EMAIL_VERIFICATION = env(
+    "DJANGO_ALLAUTH_ACCOUNT_EMAIL_VERIFICATION", default="optional"
+)
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_EMAIL_REQUIRED = env.bool("DJANGO_ACCOUNT_EMAIL_REQUIRED", default=False)
+
+# django
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/4.1/topics/email/#email-backends
+EMAIL_BACKEND = env(
+    "DJANGO_SMTP_EMAIL_BACKEND",
+    default="django.core.mail.backends.console.EmailBackend",
+)

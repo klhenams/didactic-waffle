@@ -202,3 +202,9 @@ SPECTACULAR_SETTINGS["SERVERS"] = [  # noqa F405
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------
+# Email
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/4.1/topics/email/#smtp-backend
+EMAIL_HOST_PASSWORD = env("DJANGO_SMTP_EMAIL_HOST_PASSWORD", default=None)
+# https://docs.djangoproject.com/en/4.1/topics/email/#smtp-backend
+EMAIL_USE_TLS = env.bool("DJANGO_SMTP_EMAIL_USE_TLS", default=True)
