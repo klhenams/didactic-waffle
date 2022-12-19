@@ -12,3 +12,7 @@ REDIS_URL=redis://redis:6379/0
 # Flower
 CELERY_FLOWER_USER=eGjndliXFINxUjXKabQsqRvzMhCWLtTB
 CELERY_FLOWER_PASSWORD=ofdWoOvgIIYCqSBSgyL1oUSJNll1e2ASVCO7dogPVe0kCMbaT7i9d0wp3uOOYwre
+
+# Django
+# ------------------------------------------------------------------------------
+DJANGO_READ_DOT_ENV_FILE=True
