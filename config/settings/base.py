@@ -75,6 +75,7 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth",
     "corsheaders",
     "drf_spectacular",
+    "phonenumber_field",
 ]
 
 LOCAL_APPS = [
