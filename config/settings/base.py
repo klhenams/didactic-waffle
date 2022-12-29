@@ -327,6 +327,8 @@ REST_FRAMEWORK = {
     # django-rest-framework pagination - https://www.django-rest-framework.org/api-guide/pagination/
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": env.int("DRF_PAGE_SIZE", default=10),
+    # django-rest-framework django-filters - https://www.django-rest-framework.org/api-guide/filtering/#api-guide
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
