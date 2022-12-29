@@ -75,11 +75,14 @@ THIRD_PARTY_APPS = [
     "dj_rest_auth",
     "corsheaders",
     "drf_spectacular",
+    "phonenumber_field",
+    "django_filters",
 ]
 
 LOCAL_APPS = [
     "django_crud.users",
     # Your stuff: custom apps go here
+    "django_crud.addressbooks",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -321,6 +324,11 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    # django-rest-framework pagination - https://www.django-rest-framework.org/api-guide/pagination/
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": env.int("DRF_PAGE_SIZE", default=10),
+    # django-rest-framework django-filters - https://www.django-rest-framework.org/api-guide/filtering/#api-guide
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
