@@ -21,6 +21,10 @@ class ContactViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = ab.GroupSerializer
     queryset = Group.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = [
+        "name",
+    ]
 
     def get_queryset(self, *args, **kwargs):
         assert isinstance(self.request.user.id, int)
