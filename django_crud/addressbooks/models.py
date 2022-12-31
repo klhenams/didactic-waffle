@@ -10,6 +10,7 @@ class Group(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        unique_together = ["user", "name"]
         ordering = ["-created_at"]
 
     def __str__(self):
