@@ -13,6 +13,7 @@ class ContactViewSet(viewsets.ModelViewSet):
     search_fields = [
         "name",
     ]
+    http_method_names = ["get", "post", "delete"]
 
     def get_queryset(self, *args, **kwargs):
         assert isinstance(self.request.user.id, int)
