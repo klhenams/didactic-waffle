@@ -23,7 +23,7 @@ class ContactViewSet(viewsets.ModelViewSet):
         serializer = ab.CreateContactSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
-        return Response(status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class GroupViewSet(viewsets.ModelViewSet):
