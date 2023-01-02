@@ -13,7 +13,7 @@ class GroupSerializer(serializers.ModelSerializer):
 class EmailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Email
-        fields = ["contact", "email"]
+        fields = ["id", "contact", "email"]
 
 
 class BaseContactSerializer(serializers.ModelSerializer):
