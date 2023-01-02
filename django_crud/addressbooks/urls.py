@@ -10,5 +10,6 @@ else:
 
 router.register("contacts", views.ContactViewSet)
 router.register("groups", views.GroupViewSet)
+router.register("emails", views.EmailContactViewSet)
 
 urlpatterns = router.urls
