@@ -2,7 +2,7 @@ from rest_framework import filters, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from django_crud.addressbooks.models import Contact, Email, Group
+from django_crud.addressbooks.models import Contact, Email, Group, PhoneNumber
 
 from .serializers import addressbook as ab
 
@@ -56,4 +56,9 @@ class EmailContactViewSet(viewsets.ModelViewSet):
         emails = self.queryset.filter(
             contact__group__user=self.request.user, contact=pk
         )
-        return Response(ab.EmailSerializer(emails, many=True).data)
+        return Response(self.serializer_class(emails, many=True).data)
+
+
+class PhoneContactViewSet(EmailContactViewSet):
+    serializer_class = ab.PhoneNumberSerializer
+    queryset = PhoneNumber.objects.all()

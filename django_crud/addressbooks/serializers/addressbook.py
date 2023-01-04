@@ -25,7 +25,7 @@ class BaseContactSerializer(serializers.ModelSerializer):
 class PhoneNumberSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhoneNumber
-        fields = ["contact", "phone_number"]
+        fields = ["id", "contact", "phone_number"]
 
 
 class ListEmailSerializer(EmailSerializer):
