@@ -57,3 +57,19 @@ def test_addressbook_email_contact_related_list(contact: Contact):
         resolve(f"/app/address/emails/{contact.pk}/contact/").view_name
         == "app:email-contact"
     )
+
+
+def test_addressbook_phone_contact_list():
+    assert reverse("app:phonenumber-list") == "/app/address/phones/"
+    assert resolve("/app/address/phones/").view_name == "app:phonenumber-list"
+
+
+def test_addressbook_phone_contact_related_list(contact: Contact):
+    assert (
+        reverse("app:phonenumber-contact", kwargs={"pk": contact.pk})
+        == f"/app/address/phones/{contact.pk}/contact/"
+    )
+    assert (
+        resolve(f"/app/address/phones/{contact.pk}/contact/").view_name
+        == "app:phonenumber-contact"
+    )

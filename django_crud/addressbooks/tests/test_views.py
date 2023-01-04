@@ -1,10 +1,11 @@
 from django.test import RequestFactory
 
-from django_crud.addressbooks.models import Contact, Email, Group
+from django_crud.addressbooks.models import Contact, Email, Group, PhoneNumber
 from django_crud.addressbooks.views import (
     ContactViewSet,
     EmailContactViewSet,
     GroupViewSet,
+    PhoneContactViewSet,
 )
 
 
@@ -99,3 +100,32 @@ class TestEmailContactViewSet:
         response = view.create(request)
 
         assert response.data["email"] == data["email"]
+
+
+class TestPhoneContactViewSet:
+    view = PhoneContactViewSet()
+
+    def test_phone_contact_get_queryset(
+        self, phonenumber_contact: PhoneNumber, rf: RequestFactory
+    ):
+        request = rf.get("/fake-url/")
+        request.user = phonenumber_contact.contact.group.user
+
+        self.view.request = request
+
+        assert phonenumber_contact in self.view.get_queryset()
+
+    def test_create_phone_contact(self, contact, rf: RequestFactory):
+        data = {
+            "contact": contact.pk,
+            "phone_number": "+233200105693",
+        }
+        request = rf.post("/fake-url/")
+        request.user = contact.group.user
+        request.data = data
+
+        self.view.request = request
+        self.view.format_kwarg = "json"
+        response = self.view.create(request)
+
+        assert response.data["phone_number"] == data["phone_number"]
